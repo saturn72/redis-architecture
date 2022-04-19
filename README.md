@@ -27,16 +27,16 @@ Reduce system stress - the system does not fetches already fetched data from the
 
 #### Client Caching Flow
 ```
-                               +------------------------+                               +------+
-(1) Request a record --->      |       Application      |   <--- (2) Fetch from DB ---> |  DB  |
-                               |                        |                               +------+
-                               |                        |
-                               |  (3) Insert into cache |
-    <--- (4) Response          |                        |
-                               |                        |
-(5) Request same record --->   |                        |
-<--- (6) Response from cache   |                        |
-                               +------------------------+
+                               +-----------------------+                               +------+
+(1) Request a record --->      |      Application      |   <--- (2) Fetch from DB ---> |  DB  |
+                               |                       |                               +------+
+                               |-----------------------|
+                               | (3) Insert into cache |
+    <--- (4) Response          |                       |
+                               |                       |
+(5) Request same record --->   |                       |
+<--- (6) Response from cache   |                       |
+                               +-----------------------+
 
 ```
 ### Distributed caching
@@ -64,10 +64,28 @@ Reduce system stress - the system does not fetches already fetched data from the
                               +----------------------+
 ```
 
-### Distributed & client Caching 
+### Use both distributed & client Caching 
 - When
   - performance,  need to share data between app instances
 - Pros
   - same caching snapshot for all clients
 - Cons
   - Server side overhead in managing clients cache state
+
+#### Use both distributed & client Caching Flow
+```
+
+                              +-----------------------+                              +----+    +---------------------+
+(1) Request a record --->     |      Application      |   <-- (2) Fetch from DB -->  | DB |    |  Distributed Cache  |
+                              |      Instance 1       |                              +----+    |                     |
+                              |-----------------------|   ---  (3) Insert into cache  --->     |                     |
+  <--- (6) Response           | (5) Insert into cache |   <--  (4) Notify app cache  ---       |                     |
+                              +-----------------------+                                        |                     |
+                                                                                               |                     |
+                              +-----------------------+                                         |                     |
+(7) Request same record --->  |      Application      |   <--  (4) Notify app cache  ---        |                     |
+                              |      Instance 2       |                                         |                     |
+<--- (8) Response             |-----------------------|                                         +---------------------+
+                              | (5) Insert into cache |
+                              +-----------------------+
+```
