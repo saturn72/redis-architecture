@@ -27,9 +27,9 @@ Reduce system stress - the system does not fetches already fetched data from the
 
 #### Client Caching Flow
 ```
-                               +------------------------+                             +-----------+
-(1) Request a record --->      |       Application      |   (2) Fetch from DB -->     |   Store   |
-                               |                        |   <-- (3) record from DB    +-----------+
+                               +------------------------+                             +------+
+(1) Request a record --->      |       Application      |   (2) Fetch from DB -->     |  DB  |
+                               |                        |   <-- (3) record from DB    +------+
                                |                        |
                                |  (4) Insert into cache |
     <--- (5) Response          |                        |
@@ -46,6 +46,24 @@ Reduce system stress - the system does not fetches already fetched data from the
   - Single source of true
 - Cons
   - May cause race condition on same resource
+
+#### Distributed Caching Flow
+```
+
+                              +----------------------+                              +------+    +---------------------+
+(1) Request a record --->     |      Application     |   <-- (2) Fetch from DB -->  |  DB  |    |  Distributed Cache  |
+                              |      Instance 1      |                              +------+    |                     |
+                              |                      |                                          |                     |
+  <--- (4) Response           |                      |   ---  (3) Insert into cache   --->      |                     |
+                              +----------------------+                                          |                     |
+                                                                                                |                     |
+                              +----------------------+                                          |                     |
+(5) Request same record --->  |      Application     |  < --- (6) Fetch from dist. cache --->   |                     |
+                              |      Instance 2      |                                          |                     |
+<--- (7) Response             |                      |                                          +---------------------+
+                              +----------------------+
+```
+
 ### Distributed & client Caching 
 - When
   - performance,  need to share data between app instances
