@@ -75,17 +75,17 @@ Reduce system stress - the system does not fetches already fetched data from the
 #### Use both distributed & client Caching Flow
 ```
 
-                              +-----------------------+                              +----+    +---------------------+
-(1) Request a record --->     |      Application      |   <-- (2) Fetch from DB -->  | DB |    |  Distributed Cache  |
-                              |      Instance 1       |                              +----+    |                     |
-                              |-----------------------|   ---  (3) Insert into cache  --->     |                     |
-  <--- (6) Response           | (5) Insert into cache |   <--  (4) Notify app cache  ---       |                     |
-                              +-----------------------+                                        |                     |
-                                                                                               |                     |
+                              +-----------------------+                              +----+     +---------------------+
+(1) Request a record --->     |      Application      |   <-- (2) Fetch from DB -->  | DB |     |  Distributed Cache  |
+                              |      Instance 1       |                              +----+     |                     |
+                              |-----------------------|   ---  (3) Insert into cache  --->      |                     |
+  <--- (6) Response           | (5) Insert into cache |   <--  (4) Notify app cache  ---        |                     |
+                              +-----------------------+                                         |                     |
+                                                                                                |                     |
                               +-----------------------+                                         |                     |
 (7) Request same record --->  |      Application      |   <--  (4) Notify app cache  ---        |                     |
                               |      Instance 2       |                                         |                     |
-<--- (8) Response             |-----------------------|                                         +---------------------+
+<--- (8) Response from cache  |-----------------------|                                         +---------------------+
                               | (5) Insert into cache |
                               +-----------------------+
 ```
