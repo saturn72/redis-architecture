@@ -13,7 +13,7 @@ Reduce system stress - the system does not fetches already fetched data from the
 
 ## Caching options
 ### Client Caching
-When? 
+- When? 
   - High post-fetch performance 
   - No requirement to share/aync data between app's instances (single app instance matches this criteria)
   - Low cost for fetching data
@@ -25,10 +25,18 @@ When?
   - Inconsist data is returned
   - No sync between instances
 ### Distributed caching
-When? need to share data between app instances
-- Pros - Single source of true
-- Cons - May cause race condition on same resource
+- When
+  - Share/aync data between app's instances is required (multi-instances app)
+- Pros
+  - Single source of true
+- Cons
+  - May cause race condition on same resource
 ### Distributed & client Caching 
-When? performance,  need to share data between app instances
-- Pros - same caching snapshot for all clients
+- When
+  - performance,  need to share data between app instances
+- Pros
+  - same caching snapshot for all clients
+- Cons
+  - Server sice overhead in managing clients cache state
+  - Cons - May cause race condition on same resource
 - Cons - server overhead for managing the connections
