@@ -24,6 +24,15 @@ Reduce system stress - the system does not fetches already fetched data from the
 - Cons
   - Inconsist data is returned
   - No sync between instances
+
+                               +------------------------+                             +-----------+
+(1) Request a record --->      |  Application           |   (2) Fetch from DB -->     |   Store   |
+                               +------------------------+   <-- (3) record from DB    +-----------+
+                               |                        |
+                               |  (4) Insert into cache |
+                               +------------------------+
+                               
+                               
 ### Distributed caching
 - When
   - Share/aync data between app's instances is required (multi-instances app)
