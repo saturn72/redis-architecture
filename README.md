@@ -25,14 +25,20 @@ Reduce system stress - the system does not fetches already fetched data from the
   - Inconsist data is returned
   - No sync between instances
 
+#### Client Caching Flow
+```
                                +------------------------+                             +-----------+
-(1) Request a record --->      |  Application           |   (2) Fetch from DB -->     |   Store   |
-                               +------------------------+   <-- (3) record from DB    +-----------+
+(1) Request a record --->      |       Application      |   (2) Fetch from DB -->     |   Store   |
+                               |                        |   <-- (3) record from DB    +-----------+
                                |                        |
                                |  (4) Insert into cache |
+    <--- (5) Response          |                        |
+                               |                        |
+(6) Request same record --->   |                        |
+<--- (7 Response from cache    |                        |
                                +------------------------+
-                               
-                               
+
+```
 ### Distributed caching
 - When
   - Share/aync data between app's instances is required (multi-instances app)
