@@ -6,5 +6,7 @@ As the cost of fetching record(s) from database is relatively high - we want to 
 Cost of fetching a record(s) can be measured in time it takes to process the transaction, system resources required to perform the action, load on our system in general and on the database in particular and more.
 By caching we are able to save the fetched data in high-accessed memory layer and make it availalbe in much low cost for next requests while automatically evicting it after was not required.
 
-### Main reason #1 - Keep fetching cost low as data is availble in small latency
-### Main reason #2 - Reduce system stress - the system does not fetches already fetched data from the database, freeing it to serve other requests
+### Main reason #1 
+Keep fetching cost low as data is availble in small latency
+### Main reason #2
+Reduce system stress - the system does not fetches already fetched data from the database, freeing it to serve other requests
