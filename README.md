@@ -37,6 +37,4 @@ Reduce system stress - the system does not fetches already fetched data from the
 - Pros
   - same caching snapshot for all clients
 - Cons
-  - Server sice overhead in managing clients cache state
-  - Cons - May cause race condition on same resource
-- Cons - server overhead for managing the connections
+  - Server side overhead in managing clients cache state
