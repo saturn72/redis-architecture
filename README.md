@@ -13,8 +13,13 @@ Reduce system stress - the system does not fetches already fetched data from the
 
 ## Caching options
 ### Client Caching
-When? performance, no need to share data between app instances (single instance OR the cost of fetching the data is low)
-data is rarely change and/or have minimal effect on application(s) behavior
+When? 
+  - High post-fetch performance 
+  - No requirement to share/aync data between app's instances (single app instance matches this criteria)
+  - Low cost for fetching data
+  - Data is rarely changes and have insignificant effect or no effect on app's behavior
+  - Updating and/or deleting the data insignificant effect or no effect on app's behavior
+
 - Pros - Simple, trivial and easy to implement
 - Cons
   - Inconsist data is returned
