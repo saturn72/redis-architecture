@@ -1,4 +1,4 @@
-# signalR acale-architecture
+# signalR scale-architecture
 `signalR` options for scale
 
 New to `signalR`? please read the official [documentation](https://docs.microsoft.com/en-us/aspnet/core/signalr)
