@@ -20,7 +20,9 @@ Reduce system stress - the system does not fetches already fetched data from the
   - Data is rarely changes and have insignificant effect or no effect on app's behavior
   - Updating and/or deleting the data insignificant effect or no effect on app's behavior
 
-- Pros - Simple, trivial and easy to implement
+- Pros
+  - Simple, trivial and easy to implement
+  - Can be used also for non-serialized/non-deserialized objects
 - Cons
   - Inconsist data is returned
   - No sync between instances
@@ -46,6 +48,7 @@ Reduce system stress - the system does not fetches already fetched data from the
   - Single source of true
 - Cons
   - May cause race condition on same resource
+  - Cannot be used for non-serialized/non-deserialized objects
 
 #### Distributed Caching Flow
 ```
@@ -69,6 +72,7 @@ Reduce system stress - the system does not fetches already fetched data from the
   - performance,  need to share data between app instances
 - Pros
   - same caching snapshot for all clients
+  - Can be used for non-serialized/non-deserialized objects
 - Cons
   - Server side overhead in managing clients cache state
 
